@@ -1,3 +1,18 @@
-.task-card {
-  background-color: yellow;
+.grid-main-page {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: 'create-task outstanding-tasks done-tasks';
+  background-color: blue;
+}
+
+.create-task {
+  grid-area: create-task;
+}
+
+.outstanding-tasks {
+  grid-area: outstanding-tasks;
+}
+
+.done-tasks {
+  grid-area: done-tasks;
 }

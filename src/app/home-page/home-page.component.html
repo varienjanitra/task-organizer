@@ -1,37 +1,25 @@
-<p>
-  Home Page
-</p>
-
 <div>
-  <input type="text" [(ngModel)]="newTask"/>
-  <button (click)="submitNewTask(newTask)">Add Task</button>
+  Task Manager
+</div>
+<div>
+  <button (click)="clearAllTasks()">Clear All Tasks</button>
 </div>
 
-<div>
-  <p>Tasks List</p>
-  <button (click)="clearAllTasks()">Clear All Tasks</button>
-  <div *ngFor="let task of allTasks$ | async; index as index">
-    <div class="task-card">
-      <div class="index">
-        Task Number No. {{index}}
-      </div>
-      <div class="id">
-        Task Id: {{task.id}}
-      </div>
-      <div class="name">
-        {{task.name}}
-      </div>
-      <div class="description">
-        Description: {{task.description}}
-      </div>
-      <div class="isdone">
-        Status: {{task.isDone}}
-      </div>
-      <div class="menu">
-        <button (click)="deleteTask(task)">
-          Delete Task
-        </button>
-      </div>
+<div class="grid-main-page">
+  <div class="create-task">
+    <input type="text" [(ngModel)]="newTask"/>
+    <button (click)="submitNewTask(newTask)">Add Task</button>
+  </div>
+
+  <div class="outstanding-tasks">
+    <div *ngFor="let task of outstandingTasks$ | async; index as index">
+      <task-card [task]="task" [index]="index"></task-card>
+    </div>
+  </div>
+
+  <div class="done-tasks">
+    <div *ngFor="let task of doneTasks$ | async; index as index">
+      <task-card [task]="task" [index]="index"></task-card>
     </div>
   </div>
 </div>

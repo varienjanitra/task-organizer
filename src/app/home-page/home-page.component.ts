@@ -3,14 +3,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TaskService } from '../task.service';
 import { Task } from '../task.service';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { TaskCardComponent } from '../components/task-card/task-card.component';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    TaskCardComponent
   ],
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']
@@ -18,12 +20,27 @@ import { Observable } from 'rxjs';
 export class HomePageComponent {
   newTask: string = 'yes';
   allTasks$: Observable<Task[]>;
-  //allTasks: string[] = [];
+  outstandingTasks$: Observable<Task[]>;
+  doneTasks$: Observable<Task[]>;
 
   constructor(
     private taskService: TaskService
   ) {
     this.allTasks$ = taskService.allTasksList$;
+
+    this.outstandingTasks$ = this.allTasks$.pipe(
+      map((tasks: Task[]) => {
+        let outstandingTask = tasks.filter(task => task.isDone == false)
+        return outstandingTask;
+      })
+    );
+
+    this.doneTasks$ = this.allTasks$.pipe(
+      map((tasks: Task[]) => {
+        let doneTasks = tasks.filter(task => task.isDone == true)
+        return doneTasks;
+      })
+    );
   }
 
   clearAllTasks() {
@@ -41,9 +58,5 @@ export class HomePageComponent {
     }
     this.taskService.addTask(newTask);
     this.newTask = '';
-  }
-
-  deleteTask(taskToDelete: Task) {
-    this.taskService.deleteTask(taskToDelete);
   }
 }
