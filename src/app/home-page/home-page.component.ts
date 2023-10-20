@@ -5,6 +5,7 @@ import { TaskService } from '../task.service';
 import { Task } from '../task.service';
 import { Observable, map } from 'rxjs';
 import { TaskCardComponent } from '../components/task-card/task-card.component';
+import { CreateTaskComponent } from '../components/create-task/create-task.component';
 
 @Component({
   selector: 'app-home-page',
@@ -12,7 +13,8 @@ import { TaskCardComponent } from '../components/task-card/task-card.component';
   imports: [
     CommonModule,
     FormsModule,
-    TaskCardComponent
+    TaskCardComponent,
+    CreateTaskComponent
   ],
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']

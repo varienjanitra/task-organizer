@@ -6,10 +6,7 @@
 </div>
 
 <div class="grid-main-page">
-  <div class="create-task">
-    <input type="text" [(ngModel)]="newTask"/>
-    <button (click)="submitNewTask(newTask)">Add Task</button>
-  </div>
+  <create-task></create-task>
 
   <div class="outstanding-tasks">
     <div *ngFor="let task of outstandingTasks$ | async; index as index">
