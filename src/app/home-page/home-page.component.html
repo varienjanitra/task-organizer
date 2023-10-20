@@ -11,9 +11,27 @@
   <p>Tasks List</p>
   <button (click)="clearAllTasks()">Clear All Tasks</button>
   <div *ngFor="let task of allTasks$ | async; index as index">
-    {{index}}. {{task.name}}
-    <button (click)="deleteTask(task)">
-      Delete Task
-    </button>
+    <div class="task-card">
+      <div class="index">
+        Task Number No. {{index}}
+      </div>
+      <div class="id">
+        Task Id: {{task.id}}
+      </div>
+      <div class="name">
+        {{task.name}}
+      </div>
+      <div class="description">
+        Description: {{task.description}}
+      </div>
+      <div class="isdone">
+        Status: {{task.isDone}}
+      </div>
+      <div class="menu">
+        <button (click)="deleteTask(task)">
+          Delete Task
+        </button>
+      </div>
+    </div>
   </div>
 </div>
